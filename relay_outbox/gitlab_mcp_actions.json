@@ -1,0 +1,29 @@
+[
+  {
+    "tool": "gitlab.create_issue",
+    "args": {
+      "title": "zipcode relay: Find the bug in the water sensor parser and propose a safe fix.",
+      "description": "zipcode Cloud Relay received an approved offline coding report.\n\n        Task:\n        Find the bug in the water sensor parser and propose a safe fix.\n\n        Source policy:\n        bounded local evidence only; full repository upload is not approved\n\n        Local report:\n        # zipcode offline report\n\n        Gemma model requested: `gemma4:e2b`\n        Model server status: unavailable in this run\n        Reason: dry-run requested\n\n        ## Task\n        Find the bug in the water sensor parser and propose a safe fix.\n\n        ## Local evidence inspected\n        README.md\nsensor_parser.py\n\n        ## Patch plan\n        1. Read the files listed above and identify the smallest code path tied to the task.\n        2. Make a local-only patch; do not call cloud APIs or fetch remote code.\n        3. Run the project tests or a focused smoke command.\n        4. Save the transcript so a field operator can audit what happened offline.\n\n        This fallback demonstrates the no-network workflow. For the hackathon\n        judging path, start Ollama with a Gemma 4 model and rerun the same command.",
+      "labels": [
+        "zipcode",
+        "agent-builder",
+        "human-approved"
+      ]
+    }
+  },
+  {
+    "tool": "gitlab.create_merge_request_draft",
+    "args": {
+      "title": "Draft fix from zipcode relay: Find the bug in the water sensor parser and propose a safe fix.",
+      "description": "Attach the approved patch after connected review.",
+      "source_branch": "zipcode/approved-field-fix",
+      "target_branch": "main"
+    }
+  },
+  {
+    "tool": "gitlab.add_review_note",
+    "args": {
+      "body": "Agent Builder should preserve the offline evidence transcript in the MR audit trail."
+    }
+  }
+]

@@ -89,13 +89,13 @@
   <body>
     <main>
       <header>
-        <div class="eyebrow">Google Cloud Rapid Agent Hackathon · GitLab MCP Track</div>
+        <div class="eyebrow">Google Cloud Rapid Agent Hackathon - GitLab MCP Track</div>
         <h1>zipcode Cloud Relay</h1>
         <p>
           A Gemini field coding agent for low-connectivity teams. The local agent
           gathers bounded source evidence, produces a human-reviewable patch plan,
-          and then relays approved work into Google Cloud Agent Builder and GitLab
-          MCP when connectivity returns.
+          and then writes approved Google Cloud Agent Builder and GitLab MCP relay
+          payloads when connectivity returns.
         </p>
       </header>
       <section class="grid" aria-label="Workflow">
@@ -109,7 +109,7 @@
         </article>
         <article class="panel">
           <h2>3. GitLab Relay</h2>
-          <p>Prepare issues, merge request context, review summaries, and status updates through the GitLab MCP track.</p>
+          <p>Prepare issue, merge request, review-note, and audit status payloads for the GitLab MCP track.</p>
         </article>
       </section>
       <pre><code>python zipcode_agent.py \
@@ -117,7 +117,11 @@
   --task "Find the bug in the water sensor parser and propose a safe fix." \
   --read README.md \
   --search TODO \
-  --dry-run</code></pre>
+  --dry-run
+
+python cloud_relay.py \
+  --task "Find the bug in the water sensor parser and propose a safe fix." \
+  --report relay_outbox/offline_report.md</code></pre>
       <p>
         Code repository:
         <a href="https://github.com/kevin9327/zipcode-cloud-relay">github.com/kevin9327/zipcode-cloud-relay</a>
@@ -125,4 +129,3 @@
     </main>
   </body>
 </html>
-

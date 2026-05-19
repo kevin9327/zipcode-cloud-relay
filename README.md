@@ -12,8 +12,8 @@ The prototype is intentionally small enough to audit:
 - local workspace sandboxing
 - local search and file-reading tools
 - Ollama-compatible local model backend in the offline prototype
-- planned Gemini + Google Cloud Agent Builder connected relay
-- planned GitLab MCP workflow handoff for issues, merge requests, and review notes
+- Google Cloud Agent Builder handoff payload for the connected relay
+- GitLab MCP workflow action plan for issues, merge requests, and review notes
 - deterministic dry-run mode for judges without the model installed
 
 ## Quick Demo
@@ -38,6 +38,21 @@ python zipcode_agent.py `
   --search TODO
 ```
 
+Then create the connected relay outbox:
+
+```powershell
+python cloud_relay.py `
+  --task "Find the bug in the water sensor parser and propose a safe fix." `
+  --report relay_outbox/offline_report.md `
+  --approved-by "field operator"
+```
+
+Or run both sides:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/demo.ps1
+```
+
 ## Why This Matters
 
 Many useful coding situations are not cloud-friendly: disaster-response laptops,
@@ -60,10 +75,13 @@ operator task
   -> local tools: list_files, read_file, search_text
   -> local model through Ollama-compatible chat
   -> patch plan + tests + audit transcript
+  -> human approval
+  -> Google Cloud Agent Builder handoff payload
+  -> GitLab MCP action plan
 ```
 
 The agent refuses to read outside the selected workspace. It does not need
-network access after the local model is installed. The Cloud Relay direction
+network access after the local model is installed. The Cloud Relay companion
 adds a connected approval queue so approved evidence bundles can be routed to
 Gemini and GitLab MCP without uploading an entire repository blindly.
 

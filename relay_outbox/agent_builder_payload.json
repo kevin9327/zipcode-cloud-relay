@@ -1,0 +1,19 @@
+{
+  "agent": "zipcode-cloud-relay",
+  "runtime": "google-cloud-agent-builder",
+  "model": "gemini-1.5-pro",
+  "goal": "Turn approved offline coding evidence into connected workflow actions.",
+  "constraints": [
+    "Do not request the full repository unless the human operator approves it.",
+    "Use only the approved local report as initial source evidence.",
+    "Create traceable GitLab work items before any code-changing action."
+  ],
+  "input": {
+    "project": "zipcode Cloud Relay",
+    "task": "Find the bug in the water sensor parser and propose a safe fix.",
+    "local_report": "# zipcode offline report\n\n        Gemma model requested: `gemma4:e2b`\n        Model server status: unavailable in this run\n        Reason: dry-run requested\n\n        ## Task\n        Find the bug in the water sensor parser and propose a safe fix.\n\n        ## Local evidence inspected\n        README.md\nsensor_parser.py\n\n        ## Patch plan\n        1. Read the files listed above and identify the smallest code path tied to the task.\n        2. Make a local-only patch; do not call cloud APIs or fetch remote code.\n        3. Run the project tests or a focused smoke command.\n        4. Save the transcript so a field operator can audit what happened offline.\n\n        This fallback demonstrates the no-network workflow. For the hackathon\n        judging path, start Ollama with a Gemma 4 model and rerun the same command.",
+    "approved_by": "demo operator",
+    "created_at": "2026-05-19T14:56:52+00:00",
+    "source_policy": "bounded local evidence only; full repository upload is not approved"
+  }
+}
