@@ -1,16 +1,19 @@
-# zipcode: Offline AI Coding Help for Places the Cloud Cannot Go
+# zipcode Cloud Relay: Field Coding Agent for Low-Connectivity Teams
 
-`zipcode` is a Gemma 4 powered local coding agent for air-gapped, low-connectivity,
-and privacy-sensitive environments. It helps field teams inspect a local codebase,
-reason over files, and produce a patch plan without sending source code to the
-cloud.
+`zipcode Cloud Relay` is a local-first coding agent prototype for field teams
+working in air-gapped, low-connectivity, and privacy-sensitive environments. The
+Google Cloud Rapid Agent Hackathon direction extends the local agent into a
+hybrid workflow: local evidence gathering first, then a human-approved relay to
+Gemini, Google Cloud Agent Builder, and GitLab MCP when connectivity returns.
 
 The prototype is intentionally small enough to audit:
 
 - Python stdlib only
 - local workspace sandboxing
 - local search and file-reading tools
-- Ollama-compatible Gemma 4 chat backend
+- Ollama-compatible local model backend in the offline prototype
+- planned Gemini + Google Cloud Agent Builder connected relay
+- planned GitLab MCP workflow handoff for issues, merge requests, and review notes
 - deterministic dry-run mode for judges without the model installed
 
 ## Quick Demo
@@ -24,7 +27,7 @@ python zipcode_agent.py `
   --dry-run
 ```
 
-With a local Gemma 4 model running through Ollama:
+With a local model running through Ollama:
 
 ```powershell
 $env:GEMMA_MODEL="gemma4:e2b"
@@ -42,7 +45,7 @@ clinics with sensitive patient tooling, rural schools, public-interest NGOs, and
 teams working under unstable connectivity. In those places, a cloud coding
 assistant is either unavailable or inappropriate.
 
-`zipcode` turns Gemma 4 into a local coding loop:
+`zipcode` turns local model reasoning into a field coding loop:
 
 1. collect only local evidence,
 2. ask the local model for a grounded plan,
@@ -55,19 +58,23 @@ assistant is either unavailable or inappropriate.
 operator task
   -> workspace sandbox
   -> local tools: list_files, read_file, search_text
-  -> Gemma 4 through local Ollama-compatible chat
+  -> local model through Ollama-compatible chat
   -> patch plan + tests + audit transcript
 ```
 
 The agent refuses to read outside the selected workspace. It does not need
-network access after the model is installed.
+network access after the local model is installed. The Cloud Relay direction
+adds a connected approval queue so approved evidence bundles can be routed to
+Gemini and GitLab MCP without uploading an entire repository blindly.
 
-## Hackathon Track Fit
+## Google Cloud Rapid Agent Track Fit
 
-- Main Track: practical real-world impact with working code.
-- Impact Track: Digital Equity & Inclusivity, because it brings coding help to
-  places with weak connectivity and limited infrastructure.
-- Special Technology Track: Ollama/local operations when run with Gemma 4 locally.
+- Partner track: GitLab.
+- Google Cloud fit: Agent Builder + Gemini can orchestrate the connected relay.
+- GitLab MCP fit: code-agent output naturally maps to issues, merge requests,
+  review summaries, and audit updates.
+- Impact fit: low-connectivity field teams keep sensitive source local while
+  still getting structured software workflow help.
 
 ## Relationship to Hollow AgentOS
 
